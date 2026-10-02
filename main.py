@@ -106,11 +106,20 @@ def display_intro(player_names):
     print("a number from 1 to 9.")
 
 
+def get_player_name(symbol):
+    while True:
+        name = input(f"Enter name for Player {symbol}: ").strip()
+
+        if name:
+            return name
+
+        print("Name cannot be empty.")
+
 def main():
 
     player_names = {
-        "X" : input("Enter name for player X: "),
-        "O" : input("Enter name for Player O: ")
+        "X" : get_player_name("X"),
+        "O" : get_player_name("O")
     }
 
     display_intro(player_names)
