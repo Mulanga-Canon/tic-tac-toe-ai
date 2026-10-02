@@ -134,7 +134,7 @@ def choose_game_mode():
         print("Please enter 1 or 2.")
 
 
-def computer_move(board, check):
+def computer_move_medium(board, check):
 
     # 1. Try to win
     choice = find_winning_move(board, check, "O")
@@ -213,6 +213,25 @@ def choose_difficulty():
         print("Please enter 1, 2, or 3.")
 
 
+def computer_move_easy(board, check):
+    available_positions = [
+        position
+        for position in range(1, 10)
+        if position not in check
+    ]
+
+    choice = random.choice(available_positions)
+
+    check.add(choice)
+
+    row = (choice - 1) // 3
+    column = (choice - 1) % 3
+
+    board[row][column] = "O"
+
+    print(f"Computer chooses position {choice}.")
+
+
 def main():
 
     game_mode = choose_game_mode()
@@ -251,7 +270,13 @@ def main():
             display_board(board)
 
             if game_mode == "2" and current_player == "O":
-                computer_move(board,check)
+
+                if difficulty == "1":
+                    computer_move_easy(board, check)
+
+                elif difficulty == "2":
+                    computer_move_medium(board, check)
+
             else:
                 make_move(board, check, current_player, player_names)
 
