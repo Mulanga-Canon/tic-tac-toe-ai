@@ -135,13 +135,23 @@ def choose_game_mode():
 
 
 def computer_move(board, check):
-    available_positions = [
-        position
-        for position in range(1, 10)
-        if position not in check
-    ]
 
-    choice = random.choice(available_positions)
+    # 1. Try to win
+    choice = find_winning_move(board, check, "O")
+
+    # 2. Block X from winning
+    if choice is None:
+        choice = find_winning_move(board, check, "X")
+
+    # 3. Otherwise choose randomly
+    if choice is None:
+        available_positions = [
+            position
+            for position in range(1, 10)
+            if position not in check
+        ]
+
+        choice = random.choice(available_positions)
 
     check.add(choice)
 
