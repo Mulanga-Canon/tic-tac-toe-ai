@@ -1,7 +1,7 @@
 def check_winner(board, player):
     # check rows
     for row in board:
-        if all(player==cell for cell in row):
+        if all(cell == player for cell in row):
             return True
 
     # check columns
@@ -32,7 +32,7 @@ def display_board(board):
 def make_move(board, check, player):
     while True:
         try:
-            choice = int(input(f"Player {current_player}, choose an empty position (1-9): "))
+            choice = int(input(f"Player {player}, choose an empty position (1-9): "))
             if 1 <= choice <= 9 and choice not in check:
                 check.add(choice)
                 break
@@ -42,7 +42,7 @@ def make_move(board, check, player):
         except ValueError:
             print("Please enter a number.")
 
-        # convert position to row and column
+    # convert position to row and column
     row = (choice - 1) // 3
     column = (choice - 1) % 3
 
@@ -53,15 +53,17 @@ def switch_player(player):
     return "O" if player == "X" else "X"
 
 
-def check_game_over(board, check, player):
+def check_game_over(board, check, player, scores):
     if check_winner(board, current_player):
         display_board(board)
-        print(f"Player {current_player} wins!")
+        print(f"Player {player} wins!")
+        scores[player] += 1
         return True
 
     if len(check) == 9:
         display_board(board)
         print("It's a draw!")
+        scores["draws"] += 1
         return True
 
     return False
@@ -78,6 +80,11 @@ def reset_game():
 
     return board, check, current_player
 
+scores = {
+    "X" : 0,
+    "O" : 0,
+    "draws" : 0
+}
 
 while True:
     
@@ -91,12 +98,17 @@ while True:
 
         make_move(board, check, current_player)
 
-        if check_game_over(board, check, current_player):
+        if check_game_over(board, check, current_player, scores):
             break
 
         current_player = switch_player(current_player)
 
-        #print()
+
+    # diplaying the results of the game
+    print()
+    print(f"X wins: {scores['X']}")
+    print(f"O wins: {scores['O']}")
+    print(f"Draws: {scores['draws']}\n")
 
     # Ask if the player wants another game
     while True:
