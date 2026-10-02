@@ -115,7 +115,25 @@ def get_player_name(symbol):
 
         print("Name cannot be empty.")
 
+
+def choose_game_mode():
+    while True:
+        choice = input(
+            "\nChoose game mode:\n"
+            "1. Player vs Player\n"
+            "2. Player vs Computer\n"
+            "\nEnter choice: "
+        )
+
+        if choice in ("1", "2"):
+            return choice
+
+        print("Please enter 1 or 2.")
+
+
 def main():
+
+    game_mode = choose_game_mode()
 
     player_names = {
         "X" : get_player_name("X"),
