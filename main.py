@@ -29,10 +29,10 @@ def display_board(board):
         if i < len(board) - 1:
             print("---------")
 
-def make_move(board, check, player):
+def make_move(board, check, player, player_names):
     while True:
         try:
-            choice = int(input(f"Player {player}, choose an empty position (1-9): "))
+            choice = int(input(f"{player_names[player]}, choose an empty position (1-9): "))
             if 1 <= choice <= 9 and choice not in check:
                 check.add(choice)
                 break
@@ -103,7 +103,7 @@ def main():
 
             display_board(board)
 
-            make_move(board, check, current_player)
+            make_move(board, check, current_player, player_names)
 
             if check_game_over(board, check, current_player, scores):
                 break
