@@ -197,10 +197,29 @@ def find_winning_move(board, check, player):
     return
 
 
+def choose_difficulty():
+    while True:
+        choice = input(
+            "\nChoose difficulty:\n"
+            "1. Easy\n"
+            "2. Medium\n"
+            "3. Hard\n"
+            "\nEnter choice: "
+        )
+
+        if choice in ("1", "2", "3"):
+            return choice
+
+        print("Please enter 1, 2, or 3.")
+
 
 def main():
 
     game_mode = choose_game_mode()
+    difficulty = None
+
+    if game_mode == "2":
+        difficulty = choose_difficulty()
 
     if game_mode == "1":
         player_names = {
