@@ -232,6 +232,64 @@ def computer_move_easy(board, check):
     print(f"Computer chooses position {choice}.")
 
 
+def minimax(board, depth, is_maximizing):
+
+    # Terminal states
+    if check_winner(board, "O"):
+        return 10 - depth
+
+    if check_winner(board, "X"):
+        return depth - 10
+
+    # Check for draw
+    if all(cell != " " for row in board for cell in row):
+        return 0
+
+    # Computer's turn
+    if is_maximizing:
+        best_score = float("-inf")
+
+        for row in range(3):
+            for column in range(3):
+
+                if board[row][column] == " ":
+                    board[row][column] = "O"
+
+                    score = minimax(
+                        board,
+                        depth + 1,
+                        False
+                    )
+
+                    board[row][column] = " "
+
+                    best_score = max(best_score, score)
+
+        return best_score
+
+    # Human's turn
+    else:
+        best_score = float("inf")
+
+        for row in range(3):
+            for column in range(3):
+
+                if board[row][column] == " ":
+                    board[row][column] = "X"
+
+                    score = minimax(
+                        board,
+                        depth + 1,
+                        True
+                    )
+
+                    board[row][column] = " "
+
+                    best_score = min(best_score, score)
+
+        return best_score
+
+
 def main():
 
     game_mode = choose_game_mode()
