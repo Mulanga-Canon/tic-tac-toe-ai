@@ -80,9 +80,11 @@ def reset_game():
 
 
 while True:
+    
+    # start a new game
     board, check, current_player = reset_game()
 
-
+    # Play the game
     while True:
 
         display_board(board)
@@ -94,6 +96,20 @@ while True:
 
         current_player = switch_player(current_player)
 
-        print()
+        #print()
+
+    # Ask if the player wants another game
+    while True:
+        answer = input("Play again? (y/n): ").lower()
+
+        if answer == "y":
+            break
+
+        if answer == "n":
+            print("Thanks for playing!")
+            exit()
+
+        print("Please enter y or n.")
+
 
 
