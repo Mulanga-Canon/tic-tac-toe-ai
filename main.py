@@ -80,12 +80,22 @@ def reset_game():
 
     return board, check, current_player
 
+
+def display_positions():
+    print("1 | 2 | 3")
+    print("---------")
+    print("4 | 5 | 6")
+    print("---------")
+    print("7 | 8 | 9")
+
 def main():
 
     player_names = {
         "X" : input("Enter name for player X: "),
         "O" : input("Enter name for Player O: ")
     }
+
+    display_positions()
 
     scores = {
         "X" : 0,
