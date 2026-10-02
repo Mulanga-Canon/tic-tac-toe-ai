@@ -290,6 +290,43 @@ def minimax(board, depth, is_maximizing):
         return best_score
 
 
+def computer_move_hard(board, check):
+    best_score = float("-inf")
+    best_move = None
+
+    for choice in range(1, 10):
+
+        # Skip occupied positions
+        if choice in check:
+            continue
+
+        row = (choice - 1) // 3
+        column = (choice - 1) % 3
+
+        # Pretend O plays here
+        board[row][column] = "O"
+
+        # Ask Minimax how good this move is
+        score = minimax(board, 0, False)
+
+        # Undo the pretend move
+        board[row][column] = " "
+
+        # Remember this move if it's better
+        if score > best_score:
+            best_score = score
+            best_move = choice
+
+    # Actually play the best move
+    if best_move is not None:
+        row = (best_move - 1) // 3
+        column = (best_move - 1) % 3
+
+        board[row][column] = "O"
+        check.add(best_move)
+
+        print(f"Computer chooses position {best_move}.")
+
 def main():
 
     game_mode = choose_game_mode()
@@ -335,6 +372,8 @@ def main():
                 elif difficulty == "2":
                     computer_move_medium(board, check)
 
+                elif difficulty == "3":
+                    computer_move_hard(board, check)
             else:
                 make_move(board, check, current_player, player_names)
 
