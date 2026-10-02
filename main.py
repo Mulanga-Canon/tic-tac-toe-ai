@@ -20,6 +20,65 @@ def check_winner(board, player):
     return False
 
 
+def display_board(board):
+    print()
+
+    for i, row in enumerate(board):
+        print(" | ".join(row))
+
+        if i < len(board) - 1:
+            print("---------")
+
+def make_move(board, check, player):
+    while True:
+        try:
+            choice = int(input(f"Player {current_player}, choose an empty position (1-9): "))
+            if 1 <= choice <= 9 and choice not in check:
+                check.add(choice)
+                break
+
+            print("Invalid choice. Choose an empty position from 1 to 9.")
+
+        except ValueError:
+            print("Please enter a number.")
+
+        # convert position to row and column
+    row = (choice - 1) // 3
+    column = (choice - 1) % 3
+
+    # Place the player's Symbol
+    board[row][column] = player
+
+def switch_player(player):
+    return "O" if player == "X" else "X"
+
+
+def check_game_over(board, check, player):
+    if check_winner(board, current_player):
+        display_board(board)
+        print(f"Player {current_player} wins!")
+        return True
+
+    if len(check) == 9:
+        display_board(board)
+        print("It's a draw!")
+        return True
+
+    return False
+
+def reset_game():
+    board = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "]
+    ]
+
+    check = set()
+    current_player = "X"
+
+    return board, check, current_player
+
+
 board = [
         [" ", " ", " "],
         [" ", " ", " "],
@@ -32,49 +91,14 @@ current_player = "X"
 
 while True:
 
-    # Display the board
-    for i, row in enumerate(board):
-        print(" | ".join(row))
+    display_board(board)
 
-        if i < len(board) - 1:
-            print("---------")
+    make_move(board, check, current_player)
 
-
-    # Get player's move
-    choice = -1
-    while True:
-        choice = int(input(f"Player {current_player}, choose an empty position (1-9): "))
-        if 1<=choice<=9 and choice not in check:
-            check.add(choice)
-            break
-
-        print("Invalid choice. Choose an empty position from 1 to 9.")
-
-
-    # convert position to row and column
-    row = (choice - 1) // 3
-    column = (choice - 1) % 3
-
-    # Place the player's Symbol
-    board[row][column] = current_player
-
-    if check_winner(board, current_player):
-        print()
-
-        for i, row in enumerate(board):
-            print(" | ".join(row))
-
-            if i < len(board) - 1:
-                print("---------")
-
-        print(f"Player {current_player} wins!")
+    if check_game_over(board, check, current_player):
         break
 
-    # Switch player
-    if current_player == "X":
-        current_player = "O"
-    else:
-        current_player = "X"
+    current_player = switch_player(current_player)
 
     print()
 
