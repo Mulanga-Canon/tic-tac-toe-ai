@@ -92,12 +92,28 @@ def reset_game():
 
     return board, check, current_player
 
+
+def display_intro(player_names):
+    print()
+    print("================================")
+    print("          TIC TAC TOE")
+    print("================================")
+    print()
+    print(f"Player X: {player_names['X']}")
+    print(f"Player O: {player_names['O']}")
+    print()
+    print("Choose a position by entering")
+    print("a number from 1 to 9.")
+
+
 def main():
 
     player_names = {
         "X" : input("Enter name for player X: "),
         "O" : input("Enter name for Player O: ")
     }
+
+    display_intro(player_names)
 
     scores = {
         "X" : 0,
@@ -140,9 +156,6 @@ def main():
                 return
 
             print("Please enter y or n.")
-
-
-
 
 if __name__ == "__main__":
     main()
