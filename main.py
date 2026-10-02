@@ -46,17 +46,17 @@ def make_move(board, check, player, player_names):
     row = (choice - 1) // 3
     column = (choice - 1) % 3
 
-    # Place the player's Symbol
+    # Place the player's symbol
     board[row][column] = player
 
 def switch_player(player):
     return "O" if player == "X" else "X"
 
 
-def check_game_over(board, check, player, scores):
+def check_game_over(board, check, player, scores, player_names):
     if check_winner(board, player):
         display_board(board)
-        print(f"Player {player} wins!")
+        print(f"{player_names[player]} wins!")
         scores[player] += 1
         return True
 
@@ -105,7 +105,7 @@ def main():
 
             make_move(board, check, current_player, player_names)
 
-            if check_game_over(board, check, current_player, scores):
+            if check_game_over(board, check, current_player, scores, player_names):
                 break
 
             current_player = switch_player(current_player)
