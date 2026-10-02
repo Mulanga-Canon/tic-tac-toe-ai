@@ -162,7 +162,7 @@ def main():
             "O" : get_player_name("O")
         }
     else:
-        player_name = {
+        player_names = {
             "X": get_player_name("X"),
             "O": "Computer"
         }
