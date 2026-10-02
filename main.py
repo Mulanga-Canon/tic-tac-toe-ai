@@ -42,7 +42,7 @@ def make_move(board, check, player):
         except ValueError:
             print("Please enter a number.")
 
-    # convert position to row and column
+    # Convert position to row and column
     row = (choice - 1) // 3
     column = (choice - 1) % 3
 
@@ -54,7 +54,7 @@ def switch_player(player):
 
 
 def check_game_over(board, check, player, scores):
-    if check_winner(board, current_player):
+    if check_winner(board, player):
         display_board(board)
         print(f"Player {player} wins!")
         scores[player] += 1
@@ -80,48 +80,53 @@ def reset_game():
 
     return board, check, current_player
 
-scores = {
-    "X" : 0,
-    "O" : 0,
-    "draws" : 0
-}
+def main():
 
-while True:
-    
-    # start a new game
-    board, check, current_player = reset_game()
+    scores = {
+        "X" : 0,
+        "O" : 0,
+        "draws" : 0
+    }
 
-    # Play the game
     while True:
 
-        display_board(board)
+        # start a new game
+        board, check, current_player = reset_game()
 
-        make_move(board, check, current_player)
+        # Play the game
+        while True:
 
-        if check_game_over(board, check, current_player, scores):
-            break
+            display_board(board)
 
-        current_player = switch_player(current_player)
+            make_move(board, check, current_player)
+
+            if check_game_over(board, check, current_player, scores):
+                break
+
+            current_player = switch_player(current_player)
+
+        # Display the results of the game
+        print()
+        print(f"X wins: {scores['X']}")
+        print(f"O wins: {scores['O']}")
+        print(f"Draws: {scores['draws']}\n")
+
+        # Ask if the player wants another game
+        while True:
+            answer = input("Play again? (y/n): ").lower()
+
+            if answer == "y":
+                break
+
+            if answer == "n":
+                print("Thanks for playing!")
+                return
+
+            print("Please enter y or n.")
 
 
-    # diplaying the results of the game
-    print()
-    print(f"X wins: {scores['X']}")
-    print(f"O wins: {scores['O']}")
-    print(f"Draws: {scores['draws']}\n")
-
-    # Ask if the player wants another game
-    while True:
-        answer = input("Play again? (y/n): ").lower()
-
-        if answer == "y":
-            break
-
-        if answer == "n":
-            print("Thanks for playing!")
-            exit()
-
-        print("Please enter y or n.")
 
 
+if __name__ == "__main__":
+    main()
 
