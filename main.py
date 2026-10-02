@@ -145,13 +145,25 @@ def computer_move(board, check):
 
     # 3. Otherwise choose randomly
     if choice is None:
-        available_positions = [
-            position
-            for position in range(1, 10)
-            if position not in check
-        ]
+        if 5 not in check:
+            choice = 5
+        else:
+            corners = [1, 3, 7, 9]
+            availiable_corners = [
+                position for position in corners
+                if position not in check
+            ]
 
-        choice = random.choice(available_positions)
+            if availiable_corners:
+                choice = random.choice(availiable_corners)
+            else:
+                edges = [2, 4, 6, 8]
+                availiable_edges = [
+                    position for position in edges
+                    if position not in check
+                ]
+
+                choice = random.choice(availiable_edges)
 
     check.add(choice)
 
