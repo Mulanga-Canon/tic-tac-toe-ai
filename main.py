@@ -1,3 +1,6 @@
+import random
+
+
 def check_winner(board, player):
     # check rows
     for row in board:
@@ -130,6 +133,24 @@ def choose_game_mode():
 
         print("Please enter 1 or 2.")
 
+
+def computer_move(board, check):
+    available_positions = [
+        position
+        for position in range(1, 10)
+        if position not in check
+    ]
+
+    choice = random.choice(available_positions)
+
+    check.add(choice)
+
+    row = (choice - 1) // 3
+    column = (choice - 1) % 3
+
+    board[row][column] = "O"
+
+    print(f"Computer chooses position {choice}.")
 
 def main():
 
