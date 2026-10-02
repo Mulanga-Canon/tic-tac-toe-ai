@@ -79,27 +79,21 @@ def reset_game():
     return board, check, current_player
 
 
-board = [
-        [" ", " ", " "],
-        [" ", " ", " "],
-        [" ", " ", " "]
-    ]
-
-check = set()
-current_player = "X"
-
-
 while True:
+    board, check, current_player = reset_game()
 
-    display_board(board)
 
-    make_move(board, check, current_player)
+    while True:
 
-    if check_game_over(board, check, current_player):
-        break
+        display_board(board)
 
-    current_player = switch_player(current_player)
+        make_move(board, check, current_player)
 
-    print()
+        if check_game_over(board, check, current_player):
+            break
+
+        current_player = switch_player(current_player)
+
+        print()
 
 
