@@ -19,15 +19,27 @@ def check_winner(board, player):
 
     return False
 
-
 def display_board(board):
     print()
 
+    position = 1
+
     for i, row in enumerate(board):
-        print(" | ".join(row))
+        display_row = []
+
+        for cell in row:
+            if cell == " ":
+                display_row.append(str(position))
+            else:
+                display_row.append(cell)
+
+            position += 1
+
+        print(" | ".join(display_row))
 
         if i < len(board) - 1:
             print("---------")
+
 
 def make_move(board, check, player, player_names):
     while True:
