@@ -185,7 +185,10 @@ def main():
 
             display_board(board)
 
-            make_move(board, check, current_player, player_names)
+            if game_mode == "2" and current_player == "O":
+                computer_move(board,check)
+            else:
+                make_move(board, check, current_player, player_names)
 
             if check_game_over(board, check, current_player, scores, player_names):
                 break
