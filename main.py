@@ -152,6 +152,30 @@ def computer_move(board, check):
 
     print(f"Computer chooses position {choice}.")
 
+
+def find_winning_move(board, check, player):
+    for choice in range(1, 10):
+
+        if choice in check:
+            continue
+
+        row = (choice - 1) // 3
+        column = (choice - 1) % 3
+
+        # Temporarily make the move
+        board[row][column] = player
+
+        if check_winner(board, player):
+            board[row][column] = " "
+            return choice
+
+        # Undo the temporary move
+        board[row][column] = " "
+
+    return
+
+
+
 def main():
 
     game_mode = choose_game_mode()
