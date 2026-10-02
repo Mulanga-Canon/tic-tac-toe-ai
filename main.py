@@ -135,10 +135,16 @@ def main():
 
     game_mode = choose_game_mode()
 
-    player_names = {
-        "X" : get_player_name("X"),
-        "O" : get_player_name("O")
-    }
+    if game_mode == "1":
+        player_names = {
+            "X" : get_player_name("X"),
+            "O" : get_player_name("O")
+        }
+    else:
+        player_name = {
+            "X": get_player_name("X"),
+            "O": "Computer"
+        }
 
     display_intro(player_names)
 
