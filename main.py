@@ -82,6 +82,11 @@ def reset_game():
 
 def main():
 
+    player_names = {
+        "X" : input("Enter name for player X: "),
+        "O" : input("Enter name for Player O: ")
+    }
+
     scores = {
         "X" : 0,
         "O" : 0,
