@@ -44,6 +44,7 @@ Planned upgrades for future versions include:
 - Add restart/new game buttons
 - Improve the overall design and user experience
 
+## Future Improvements has been made :) Go check it out!!
 
 ## Technologies
 
